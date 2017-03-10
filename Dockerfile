@@ -1,4 +1,13 @@
-FROM golang:onbuild
+FROM iron/base
 EXPOSE 6767
 
-HEALTHCHECK --interval=3s --timeout=3s CMD ["/go/src/app/healthchecker/healthchecker", "-port=6767"] || exit 1
+# export CGO_ENABLED=0 
+
+
+
+ADD diversity_calendar /
+ADD healthchecker/healthchecker /
+
+HEALTHCHECK --interval=3s --timeout=3s CMD ["./healthchecker", "-port=6767"] || exit 1
+
+ENTRYPOINT ["./diversity_calendar"]
