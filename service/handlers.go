@@ -44,7 +44,7 @@ func check(e error) {
 }
 
 func readSourcefile(date_string string) model.Holiday {
-	f, err := os.Open("/home/peter/gocode/src/github.com/hatorikibble/diversity_calendar/Diversity_Kalender_2017.csv")
+	f, err := os.Open("/home/peter/gocode/src/github.com/hatorikibble/diversity_calendar/Diversity_Kalender_2018.csv")
 	check(err)
 	defer f.Close()
 
@@ -61,7 +61,7 @@ func readSourcefile(date_string string) model.Holiday {
 			check(err)
 		}
 		lineCount += 1
-		s := model.Holiday{Date: record[0], Name: strings.TrimSpace(record[1]), Religion: record[2]}
+		s := model.Holiday{Date: record[2], Name: strings.TrimSpace(record[0]), Type: record[1], Description: strings.TrimSpace(record[4])}
 		if s.Date == date_string {
 			return s
 
